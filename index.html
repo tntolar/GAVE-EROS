@@ -1,39 +1,143 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GAVE EROS</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #a07f61; /* لون الخلفية */
-      color: #ffffff; /* لون الاسم */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
-    }
-    h1 { font-size: 60px; margin: 0; }
-    p { font-size: 24px; margin: 10px 0 20px; }
-    .btn {
-      padding: 12px 24px;
-      background-color: #ffffff;
-      color: #a07f61;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAVE EROS</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #a07f61;
+            /* لون الخلفية */
+            color: #ffffff;
+            /* لون الاسم */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 24px;
+            margin: 10px 0 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            background-color: #ffffff;
+            color: #a07f61;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        section#products {
+            margin-top: 50px;
+            width: 80%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .product-item {
+            background-color: #ffffff;
+            color: #a07f61;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .product-item button {
+            padding: 10px 15px;
+            background-color: #a07f61;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        section#cart {
+            margin-top: 50px;
+            width: 80%;
+            max-width: 1200px;
+            color: #ffffff;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>GAVE EROS</h1>
-  <p>متجر الملابس العصري</p>
-  <button class="btn">تسوق الآن</button>
+    <h1>GAVE EROS</h1>
+    <p>مرحبًا بك في متجر GAVE EROS، حيث تجد أحدث صيحات الملابس للرجال والنساء.</p>
+    <a href="#products"><button class="btn">تسوق الآن</button></a>
+
+    <!-- قسم المنتجات -->
+    <section id="products">
+        <h2 style="color: #ffffff; font-size: 36px; margin-bottom: 20px;">منتجاتنا</h2>
+        <div class="product-list">
+            <!-- منتج 1 -->
+            <div class="product-item">
+                <h3>تيشيرت رجالي</h3>
+                <p>سعر: 20$</p>
+                <button>أضف للسلة</button>
+            </div>
+            <!-- منتج 2 -->
+            <div class="product-item">
+                <h3>فستان نسائي</h3>
+                <p>سعر: 35$</p>
+                <button>أضف للسلة</button>
+            </div>
+            <!-- يمكنك إضافة المزيد من المنتجات هنا -->
+        </div>
+    </section>
+
+    <!-- سلة التسوق -->
+    <section id="cart">
+        <h2 style="font-size: 36px; margin-bottom: 20px;">سلة التسوق</h2>
+        <div id="cart-items" style="display: flex; flex-direction: column; gap: 10px;">
+            <p>سلة التسوق فارغة.</p>
+        </div>
+    </section>
+
+    <script>
+        // جافاسكربت لإضافة المنتجات للسلة
+        const buttons = document.querySelectorAll('.product-item button');
+        const cartItems = document.getElementById('cart-items');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const product = btn.parentElement.querySelector('h3').innerText;
+                const price = btn.parentElement.querySelector('p').innerText;
+
+                // إزالة رسالة السلة الفارغة عند إضافة أول منتج
+                const emptyMsg = cartItems.querySelector('p');
+                if (emptyMsg) emptyMsg.remove();
+
+                const item = document.createElement('p');
+                item.innerText = `${product} - ${price}`;
+                cartItems.appendChild(item);
+            });
+        });
+    </script>
 </body>
+
 </html>
